@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoyaltyHub — Loyalty Points Management & Audit Platform</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234f46e5'/><text x='50' y='66' font-size='52' font-family='Arial' font-weight='bold' text-anchor='middle' fill='white'>LH</text></svg>" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-logo">LH</div>
+        <div>
+          <div class="brand-title">LoyaltyHub</div>
+          <div class="brand-sub">Points &amp; Audit Engine</div>
+        </div>
+      </div>
+
+      <nav class="nav-menu" aria-label="Primary Navigation">
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">&#9632;</span> Dashboard
+        </button>
+        <button class="nav-item" data-page="customers">
+          <span class="nav-icon">&#9786;</span> Customers
+        </button>
+        <button class="nav-item" data-page="orders">
+          <span class="nav-icon">&#9635;</span> Orders
+        </button>
+        <button class="nav-item" data-page="transactions">
+          <span class="nav-icon">&#8644;</span> Transactions
+        </button>
+        <button class="nav-item" data-page="rewards">
+          <span class="nav-icon">&#9733;</span> Rewards
+        </button>
+        <button class="nav-item" data-page="analytics">
+          <span class="nav-icon">&#9650;</span> Analytics
+        </button>
+        <button class="nav-item" data-page="audit">
+          <span class="nav-icon">&#9888;</span> Audit &amp; Validation
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a id="swagger-docs-link" href="/docs" target="_blank" class="swagger-link">Swagger API Docs &#8599;</a>
+        <div class="seed-badge">Seed: 20261022</div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="menu-toggle" class="btn-icon mobile-only" aria-label="Toggle Menu">&#9776;</button>
+          <div>
+            <h1 id="page-title">Executive Dashboard</h1>
+            <p id="page-subtitle" class="subtitle">Real-time loyalty liability, ledger flow, and audit health</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button id="btn-run-expire" class="btn btn-secondary">Run Expiry Job</button>
+          <button id="btn-refresh-all" class="btn btn-primary">Refresh Data</button>
+        </div>
+      </header>
+
+      <!-- Toast Banner -->
+      <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+      <!-- ==================== PAGE 1: DASHBOARD ==================== -->
+      <section id="page-dashboard" class="page active">
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-label">Total Customers</div>
+            <div class="kpi-value" id="kpi-customers">-</div>
+            <div class="kpi-meta">Active loyalty members</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Total Orders</div>
+            <div class="kpi-value" id="kpi-orders">-</div>
+            <div class="kpi-meta">Processed retail orders</div>
+          </div>
+          <div class="kpi-card accent-green">
+            <div class="kpi-label">Points Earned</div>
+            <div class="kpi-value" id="kpi-earned">-</div>
+            <div class="kpi-meta">Accrued from net eligible spend</div>
+          </div>
+          <div class="kpi-card accent-blue">
+            <div class="kpi-label">Points Redeemed</div>
+            <div class="kpi-value" id="kpi-redeemed">-</div>
+            <div class="kpi-meta">Claimed across reward catalog</div>
+          </div>
+          <div class="kpi-card accent-amber">
+            <div class="kpi-label">Points Expired</div>
+            <div class="kpi-value" id="kpi-expired">-</div>
+            <div class="kpi-meta">Unspent points past expiry date</div>
+          </div>
+          <div class="kpi-card accent-indigo">
+            <div class="kpi-label">Outstanding Liability</div>
+            <div class="kpi-value" id="kpi-liability">-</div>
+            <div class="kpi-meta">Current redeemable points pool</div>
+          </div>
+          <div class="kpi-card accent-red clickable" id="kpi-anomalies-card">
+            <div class="kpi-label">Detected Anomalies</div>
+            <div class="kpi-value" id="kpi-anomalies">-</div>
+            <div class="kpi-meta" id="kpi-rejected-meta">Click to inspect audit</div>
+          </div>
+        </div>
+
+        <div class="two-col-grid">
+          <div class="card">
+            <div class="card-header">
+              <h2>Monthly Points Flow</h2>
+              <span class="badge badge-muted">Accrual vs Redemption</span>
+            </div>
+            <div class="chart-box">
+              <canvas id="dashFlowChart"></canvas>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h2>Membership Tier Breakdown</h2>
+              <span class="badge badge-muted">Qualifying Net Spend</span>
+            </div>
+            <div class="chart-box">
+              <canvas id="dashTierChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Quick Live Workflow Demo</h2>
+            <span class="badge badge-indigo">End-to-End Business Rules</span>
+          </div>
+          <div class="quick-actions-grid">
+            <button class="quick-btn" data-goto="customers">1. Enroll / Inspect Customer</button>
+            <button class="quick-btn" data-goto="transactions">2. Create Order / Reverse Return</button>
+            <button class="quick-btn" data-goto="rewards">3. Redeem Points for Reward</button>
+            <button class="quick-btn" data-goto="audit">4. Inspect Ledger Reconciliation &amp; Anomalies</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 2: CUSTOMERS ==================== -->
+      <section id="page-customers" class="page">
+        <div class="card">
+          <div class="toolbar">
+            <div class="toolbar-filters">
+              <input type="text" id="cust-search" class="input" placeholder="Search ID, name, email, or city..." />
+              <select id="cust-tier-filter" class="input">
+                <option value="">All Tiers</option>
+                <option value="TIER-BRONZE">Bronze</option>
+                <option value="TIER-SILVER">Silver</option>
+                <option value="TIER-GOLD">Gold</option>
+              </select>
+              <select id="cust-segment-filter" class="input">
+                <option value="">All Segments</option>
+                <option value="budget">Budget</option>
+                <option value="regular">Regular</option>
+                <option value="premium">Premium</option>
+                <option value="vip">VIP</option>
+              </select>
+              <button id="btn-cust-search" class="btn btn-secondary">Search</button>
+            </div>
+            <button id="btn-open-new-cust" class="btn btn-primary">+ Register Customer</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Customer ID</th>
+                  <th>Account ID</th>
+                  <th>Name</th>
+                  <th>City</th>
+                  <th>Segment</th>
+                  <th>Tier</th>
+                  <th>Balance</th>
+                  <th>Qualifying Spend</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="customers-tbody"></tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <span id="cust-page-info" class="muted">Showing 0</span>
+            <div class="pagination-btns">
+              <button id="cust-prev" class="btn btn-secondary btn-sm">Previous</button>
+              <button id="cust-next" class="btn btn-secondary btn-sm">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Detail Panel -->
+        <div id="customer-detail-card" class="card hidden">
+          <div class="card-header">
+            <div>
+              <h2 id="detail-cust-name">Customer Profile</h2>
+              <p class="muted" id="detail-cust-meta"></p>
+            </div>
+            <button id="btn-close-detail" class="btn btn-secondary btn-sm">Close</button>
+          </div>
+
+          <div class="detail-stats-grid" id="detail-account-stats"></div>
+
+          <div class="two-col-grid">
+            <div class="subcard">
+              <h3>Place New Order &amp; Accrue Points</h3>
+              <form id="form-quick-order" class="stack-form">
+                <input type="hidden" id="order-cust-id" />
+                <div class="form-row">
+                  <label>Product
+                    <input type="text" id="order-product" class="input" value="Wireless Noise-Cancelling Headphones" required />
+                  </label>
+                  <label>Unit Price ($)
+                    <input type="number" id="order-price" class="input" value="150.00" step="0.01" min="1" required />
+                  </label>
+                </div>
+                <div class="form-row">
+                  <label>Quantity
+                    <input type="number" id="order-qty" class="input" value="1" min="1" required />
+                  </label>
+                  <label>Discount ($)
+                    <input type="number" id="order-discount" class="input" value="0.00" step="0.01" min="0" required />
+                  </label>
+                  <label>Eligible?
+                    <select id="order-eligible" class="input">
+                      <option value="true">Yes (Points Eligible)</option>
+                      <option value="false">No (Gift Card / Excluded)</option>
+                    </select>
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Order &amp; Accrue Points</button>
+              </form>
+            </div>
+
+            <div class="subcard">
+              <h3>Tier Progression History</h3>
+              <div class="table-wrap compact">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Type</th>
+                      <th>From &rarr; To</th>
+                      <th>Qualifying Spend</th>
+                      <th>Reason</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detail-tier-history"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="two-col-grid">
+            <div class="subcard">
+              <h3>Recent Orders (Click Return to Reverse Points)</h3>
+              <div class="table-wrap compact">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Gross</th>
+                      <th>Net Eligible</th>
+                      <th>Returned</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detail-orders-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="subcard">
+              <h3>Account Ledger History</h3>
+              <div class="table-wrap compact">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>TX ID</th>
+                      <th>Type</th>
+                      <th>Delta</th>
+                      <th>Balance</th>
+                      <th>Reference</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detail-tx-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 2B: ORDERS ==================== -->
+      <section id="page-orders" class="page">
+        <div class="card">
+          <div class="toolbar">
+            <div class="toolbar-filters">
+              <input type="text" id="ord-search" class="input" placeholder="Search Order ID, Customer ID, or Name..." />
+              <select id="ord-status-filter" class="input">
+                <option value="">All Statuses</option>
+                <option value="COMPLETED">COMPLETED</option>
+                <option value="PARTIALLY_RETURNED">PARTIALLY_RETURNED</option>
+                <option value="RETURNED">RETURNED</option>
+              </select>
+              <input type="text" id="ord-customer-filter" class="input" placeholder="Filter Customer ID..." />
+              <button id="btn-ord-search" class="btn btn-secondary">Search</button>
+            </div>
+            <span id="ord-total-badge" class="badge badge-muted">0 orders</span>
+          </div>
+          <div id="ord-error-box" class="result-box err hidden" role="alert"></div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Order Date</th>
+                  <th>Total Amount</th>
+                  <th>Eligible Amount</th>
+                  <th>Points Earned</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody"></tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <span id="ord-page-info" class="muted">Showing 0</span>
+            <div class="pagination-btns">
+              <button id="ord-prev" class="btn btn-secondary btn-sm">Previous</button>
+              <button id="ord-next" class="btn btn-secondary btn-sm">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Details Panel -->
+        <div id="order-detail-card" class="card hidden">
+          <div class="card-header">
+            <div>
+              <h2 id="detail-ord-title">Order Details</h2>
+              <p class="muted" id="detail-ord-meta"></p>
+            </div>
+            <button id="btn-close-order-detail" class="btn btn-secondary btn-sm">Close</button>
+          </div>
+
+          <div class="detail-stats-grid" id="detail-order-stats"></div>
+          <div id="detail-ord-return-info" class="result-box hidden"></div>
+
+          <div class="two-col-grid">
+            <div class="subcard">
+              <h3>Order Line Items</h3>
+              <div class="table-wrap compact">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>SKU / Line</th>
+                      <th>Product</th>
+                      <th>Category</th>
+                      <th>Qty</th>
+                      <th>Unit Price</th>
+                      <th>Net Eligible</th>
+                      <th>Returned</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detail-ord-lines-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="subcard">
+              <h3>Linked Points Transactions</h3>
+              <div class="table-wrap compact">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>TX ID</th>
+                      <th>Type</th>
+                      <th>Delta</th>
+                      <th>Balance</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody id="detail-ord-tx-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 3: TRANSACTIONS ==================== -->
+      <section id="page-transactions" class="page">
+        <div class="two-col-grid">
+          <div class="card">
+            <div class="card-header">
+              <h2>Reverse Order Points (Full / Partial Return)</h2>
+            </div>
+            <form id="form-reverse-order" class="stack-form">
+              <div class="form-row">
+                <label>Order ID
+                  <input type="text" id="rev-order-id" class="input" placeholder="e.g. ORD-2026-000001" required />
+                </label>
+                <label>Return Amount ($ optional, blank = full return)
+                  <input type="number" id="rev-amount" class="input" step="0.01" min="0.01" placeholder="Full return if empty" />
+                </label>
+              </div>
+              <div class="form-row">
+                <label>Reason
+                  <input type="text" id="rev-reason" class="input" value="Customer product return" required />
+                </label>
+              </div>
+              <button type="submit" class="btn btn-secondary">Process Return Reversal</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Run Points Expiration Batch</h2>
+            </div>
+            <form id="form-expire-batch" class="stack-form">
+              <div class="form-row">
+                <label>As-Of Cutoff Date (ISO)
+                  <input type="text" id="exp-cutoff" class="input" value="2026-11-11T23:59:59" required />
+                </label>
+                <label>Account ID (optional)
+                  <input type="text" id="exp-account-id" class="input" placeholder="All accounts if blank" />
+                </label>
+              </div>
+              <button type="submit" class="btn btn-secondary">Execute Idempotent Expiration</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="toolbar">
+            <div class="toolbar-filters">
+              <input type="text" id="tx-search" class="input" placeholder="Search TX ID, Account, Order, Redemption..." />
+              <select id="tx-type-filter" class="input">
+                <option value="">All Types</option>
+                <option value="ACCRUAL">ACCRUAL</option>
+                <option value="REDEMPTION">REDEMPTION</option>
+                <option value="REVERSAL">REVERSAL</option>
+                <option value="EXPIRY">EXPIRY</option>
+              </select>
+              <button id="btn-tx-search" class="btn btn-secondary">Filter</button>
+            </div>
+            <span id="tx-total-badge" class="badge badge-muted">0 records</span>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Account ID</th>
+                  <th>Type</th>
+                  <th>Points Delta</th>
+                  <th>Balance After</th>
+                  <th>Status</th>
+                  <th>References</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="tx-tbody"></tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <span id="tx-page-info" class="muted">Showing 0</span>
+            <div class="pagination-btns">
+              <button id="tx-prev" class="btn btn-secondary btn-sm">Previous</button>
+              <button id="tx-next" class="btn btn-secondary btn-sm">Next</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 4: REWARDS ==================== -->
+      <section id="page-rewards" class="page">
+        <div class="two-col-grid">
+          <div class="card">
+            <div class="card-header">
+              <h2>Redeem Reward</h2>
+              <span class="badge badge-indigo">Atomic Balance Lock</span>
+            </div>
+            <form id="form-redeem" class="stack-form">
+              <label>Loyalty Account ID
+                <input type="text" id="rdm-account-id" class="input" value="LOY-CUST-000001" required />
+              </label>
+              <label>Select Reward
+                <select id="rdm-reward-id" class="input" required></select>
+              </label>
+              <div class="form-row">
+                <label>Quantity
+                  <input type="number" id="rdm-quantity" class="input" value="1" min="1" required />
+                </label>
+                <label>Idempotency Key (optional)
+                  <input type="text" id="rdm-idem-key" class="input" placeholder="Auto-generated if empty" />
+                </label>
+              </div>
+              <button type="submit" class="btn btn-primary">Redeem Reward</button>
+            </form>
+            <div id="rdm-result-box" class="result-box hidden"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Available Rewards Catalog</h2>
+            </div>
+            <div id="rewards-grid" class="rewards-grid"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Recent Redemptions (Completed &amp; Rejected)</h2>
+            <select id="rdm-status-filter" class="input input-sm">
+              <option value="">All Statuses</option>
+              <option value="COMPLETED">COMPLETED</option>
+              <option value="REJECTED">REJECTED</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Redemption ID</th>
+                  <th>Account ID</th>
+                  <th>Reward</th>
+                  <th>Points Used</th>
+                  <th>Status</th>
+                  <th>Failure Reason</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody id="rdm-history-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 5: ANALYTICS ==================== -->
+      <section id="page-analytics" class="page">
+        <div class="two-col-grid">
+          <div class="card">
+            <div class="card-header"><h2>Points Earned vs Redeemed</h2></div>
+            <div class="chart-box"><canvas id="anaEarnedRedeemedChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h2>Monthly Transaction Trends</h2></div>
+            <div class="chart-box"><canvas id="anaMonthlyTrendChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h2>Tier Distribution</h2></div>
+            <div class="chart-box"><canvas id="anaTierDistChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h2>Expired Points &amp; Lot Status Analysis</h2></div>
+            <div class="chart-box"><canvas id="anaExpiryChart"></canvas></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>Anomaly Distribution by Category</h2></div>
+          <div class="chart-box short"><canvas id="anaAnomalyChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h2>Customer Segment Analytics (Pandas + NumPy)</h2>
+            <a id="export-segments-link" href="/analytics/export" class="btn btn-secondary btn-sm">Export Segment CSV</a>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Segment</th>
+                  <th>Customers</th>
+                  <th>Avg Balance</th>
+                  <th>Total Earned</th>
+                  <th>Redemption Rate</th>
+                  <th>Avg Qualifying Spend</th>
+                  <th>Median Spend</th>
+                  <th>P90 Spend</th>
+                </tr>
+              </thead>
+              <tbody id="ana-segments-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== PAGE 6: AUDIT & VALIDATION ==================== -->
+      <section id="page-audit" class="page">
+        <div class="kpi-grid" id="audit-kpis"></div>
+
+        <div class="two-col-grid">
+          <div class="card">
+            <div class="card-header">
+              <h2>Ledger Reconciliation Mismatches</h2>
+              <span class="badge badge-red" id="recon-badge">Checking...</span>
+            </div>
+            <div class="table-wrap compact">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Account ID</th>
+                    <th>Stored Balance</th>
+                    <th>Ledger Sum</th>
+                    <th>Discrepancy</th>
+                  </tr>
+                </thead>
+                <tbody id="recon-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Rejected Insufficient-Balance Attempts</h2>
+              <span class="badge badge-amber" id="rejected-attempts-badge">0</span>
+            </div>
+            <div class="table-wrap compact">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Redemption ID</th>
+                    <th>Account ID</th>
+                    <th>Points Requested</th>
+                    <th>Reason</th>
+                  </tr>
+                </thead>
+                <tbody id="rejected-attempts-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="toolbar">
+            <div class="toolbar-filters">
+              <select id="audit-type-filter" class="input">
+                <option value="">All Anomaly Types</option>
+                <option value="BALANCE_MISMATCH">Balance Mismatch</option>
+                <option value="INVALID_REDEMPTION_OVERDRAFT">Invalid Redemption Overdraft</option>
+                <option value="MISSING_REVERSAL">Missing Reversal on Return</option>
+                <option value="DOUBLE_EXPIRATION">Double Expiration</option>
+                <option value="INCORRECT_TIER_GROSS_SPEND">Incorrect Tier (Gross Spend)</option>
+                <option value="DUPLICATE_ACCRUAL">Duplicate Accrual</option>
+              </select>
+              <button id="btn-rerun-audit" class="btn btn-primary">Re-run Audit Scan</button>
+            </div>
+            <button id="btn-export-audit" class="btn btn-secondary">Export Anomalies JSON</button>
+          </div>
+          <div id="audit-status-box" class="result-box hidden" role="status" aria-live="polite"></div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Record ID</th>
+                  <th>Entity</th>
+                  <th>Issue Type</th>
+                  <th>Severity</th>
+                  <th>Expected</th>
+                  <th>Actual</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="anomalies-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Register Customer Modal -->
+  <div id="modal-new-customer" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="card-header">
+        <h2>Register Loyalty Customer</h2>
+        <button id="btn-close-modal" class="btn btn-secondary btn-sm">Close</button>
+      </div>
+      <form id="form-new-customer" class="stack-form">
+        <label>Full Name
+          <input type="text" id="new-cust-name" class="input" placeholder="Priya Nair" required />
+        </label>
+        <label>Email
+          <input type="email" id="new-cust-email" class="input" placeholder="priya.nair@example.com" required />
+        </label>
+        <div class="form-row">
+          <label>Phone
+            <input type="text" id="new-cust-phone" class="input" placeholder="+1-555-234-5678" />
+          </label>
+          <label>City
+            <input type="text" id="new-cust-city" class="input" placeholder="Austin" />
+          </label>
+        </div>
+        <label>Customer Segment
+          <select id="new-cust-segment" class="input">
+            <option value="regular">Regular</option>
+            <option value="budget">Budget</option>
+            <option value="premium">Premium</option>
+            <option value="vip">VIP</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary">Create Customer &amp; Loyalty Account</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+

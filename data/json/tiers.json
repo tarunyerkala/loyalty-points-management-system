@@ -1,0 +1,35 @@
+[
+  {
+    "tier_id": "TIER-BRONZE",
+    "tier_name": "Bronze",
+    "tier_level": 1,
+    "min_qualifying_spend": 0.0,
+    "max_qualifying_spend": 999.99,
+    "earn_rate_multiplier": 1.0,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "is_active": 1
+  },
+  {
+    "tier_id": "TIER-SILVER",
+    "tier_name": "Silver",
+    "tier_level": 2,
+    "min_qualifying_spend": 1000.0,
+    "max_qualifying_spend": 4999.99,
+    "earn_rate_multiplier": 1.5,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "is_active": 1
+  },
+  {
+    "tier_id": "TIER-GOLD",
+    "tier_name": "Gold",
+    "tier_level": 3,
+    "min_qualifying_spend": 5000.0,
+    "max_qualifying_spend": null,
+    "earn_rate_multiplier": 2.0,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "is_active": 1
+  }
+]

@@ -1,0 +1,7 @@
+reward_id,reward_name,description,category,points_required,min_tier_level,stock_quantity,is_active,effective_from,effective_to,created_at
+REW-0001,$5 Instant Checkout Discount,Redeem 500 points for $5 off your next order.,Discount Voucher,500,1,999999,1,2025-01-01T00:00:00,,2025-01-01T00:00:00
+REW-0002,$10 Digital Gift Voucher,"Redeem 1,000 points for a $10 store voucher.",Gift Card,1000,1,999999,1,2025-01-01T00:00:00,,2025-01-01T00:00:00
+REW-0003,Free Express Shipping Pass,Complimentary express delivery on your next 3 orders.,Shipping Perk,1500,1,999999,1,2025-01-01T00:00:00,,2025-01-01T00:00:00
+REW-0004,$25 Partner Retail Card,"Redeem 2,500 points for a $25 partner gift card.",Gift Card,2500,1,999999,1,2025-01-01T00:00:00,,2025-01-01T00:00:00
+REW-0005,$50 Store Credit Voucher,High-value $50 credit usable across all eligible categories.,Store Credit,5000,2,999999,1,2025-01-01T00:00:00,,2025-01-01T00:00:00
+REW-0006,VIP Wireless Earbuds Bundle,Exclusive Gold-tier electronics merchandise reward.,Merchandise,10000,3,50000,1,2025-01-01T00:00:00,,2025-01-01T00:00:00

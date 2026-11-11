@@ -1,0 +1,80 @@
+[
+  {
+    "reward_id": "REW-0001",
+    "reward_name": "$5 Instant Checkout Discount",
+    "description": "Redeem 500 points for $5 off your next order.",
+    "category": "Discount Voucher",
+    "points_required": 500,
+    "min_tier_level": 1,
+    "stock_quantity": 999999,
+    "is_active": 1,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "created_at": "2025-01-01T00:00:00"
+  },
+  {
+    "reward_id": "REW-0002",
+    "reward_name": "$10 Digital Gift Voucher",
+    "description": "Redeem 1,000 points for a $10 store voucher.",
+    "category": "Gift Card",
+    "points_required": 1000,
+    "min_tier_level": 1,
+    "stock_quantity": 999999,
+    "is_active": 1,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "created_at": "2025-01-01T00:00:00"
+  },
+  {
+    "reward_id": "REW-0003",
+    "reward_name": "Free Express Shipping Pass",
+    "description": "Complimentary express delivery on your next 3 orders.",
+    "category": "Shipping Perk",
+    "points_required": 1500,
+    "min_tier_level": 1,
+    "stock_quantity": 999999,
+    "is_active": 1,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "created_at": "2025-01-01T00:00:00"
+  },
+  {
+    "reward_id": "REW-0004",
+    "reward_name": "$25 Partner Retail Card",
+    "description": "Redeem 2,500 points for a $25 partner gift card.",
+    "category": "Gift Card",
+    "points_required": 2500,
+    "min_tier_level": 1,
+    "stock_quantity": 999999,
+    "is_active": 1,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "created_at": "2025-01-01T00:00:00"
+  },
+  {
+    "reward_id": "REW-0005",
+    "reward_name": "$50 Store Credit Voucher",
+    "description": "High-value $50 credit usable across all eligible categories.",
+    "category": "Store Credit",
+    "points_required": 5000,
+    "min_tier_level": 2,
+    "stock_quantity": 999999,
+    "is_active": 1,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "created_at": "2025-01-01T00:00:00"
+  },
+  {
+    "reward_id": "REW-0006",
+    "reward_name": "VIP Wireless Earbuds Bundle",
+    "description": "Exclusive Gold-tier electronics merchandise reward.",
+    "category": "Merchandise",
+    "points_required": 10000,
+    "min_tier_level": 3,
+    "stock_quantity": 50000,
+    "is_active": 1,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "created_at": "2025-01-01T00:00:00"
+  }
+]

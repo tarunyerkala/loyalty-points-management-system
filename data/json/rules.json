@@ -1,0 +1,36 @@
+[
+  {
+    "rule_id": "RULE-0001",
+    "rule_name": "Standard Net Spend Accrual Rule",
+    "rule_type": "ACCRUAL",
+    "tier_id": null,
+    "base_points_per_currency": 10.0,
+    "multiplier": 1.0,
+    "expiry_days": 365,
+    "min_spend": 0.0,
+    "exclude_tax": 1,
+    "exclude_shipping": 1,
+    "exclude_discount": 1,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "status": "ACTIVE",
+    "created_at": "2025-01-01T00:00:00"
+  },
+  {
+    "rule_id": "RULE-0002",
+    "rule_name": "Standard 365-Day Points Expiration Rule",
+    "rule_type": "EXPIRY",
+    "tier_id": null,
+    "base_points_per_currency": 0.0,
+    "multiplier": 1.0,
+    "expiry_days": 365,
+    "min_spend": 0.0,
+    "exclude_tax": 1,
+    "exclude_shipping": 1,
+    "exclude_discount": 1,
+    "effective_from": "2025-01-01T00:00:00",
+    "effective_to": null,
+    "status": "ACTIVE",
+    "created_at": "2025-01-01T00:00:00"
+  }
+]

@@ -1,0 +1,352 @@
+[
+  {
+    "record_id": "LOY-CUST-019372",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=48979)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (49579)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-001266",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=415)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (-85)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-016606",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=12740)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (11990)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-011847",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=9309)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (8559)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-007239",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=487)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (1087)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-019379",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=420)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (-80)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-004141",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=363)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (963)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-006324",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=11721)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (10971)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-016914",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=152)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (1402)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-018489",
+    "issue_type": "BALANCE_MISMATCH",
+    "expected_outcome": "FLAG_DISCREPANCY (ledger_balance=1948)",
+    "actual_outcome": "STORED_BALANCE_CORRUPTED (1198)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168065",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2342)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168066",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2500)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168067",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2200)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168068",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2018)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168069",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2041)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168070",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2007)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168071",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2162)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168072",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2340)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168073",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2396)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "RDM-2026-168074",
+    "issue_type": "INVALID_REDEMPTION_OVERDRAFT",
+    "expected_outcome": "REJECT_INSUFFICIENT_BALANCE",
+    "actual_outcome": "COMPLETED_OVERDRAFT (balance=-2375)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-036038",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_6350_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-051178",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_4190_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-021782",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_2039_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-044336",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_3988_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-008380",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_920_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-015194",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_1080_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-023181",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_2900_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-078041",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_6300_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-082180",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_4590_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "ORD-2026-034165",
+    "issue_type": "MISSING_REVERSAL",
+    "expected_outcome": "REVERSE_3170_POINTS",
+    "actual_outcome": "RETAINED_EARNED_POINTS_ON_RETURN",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-016488",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (6340 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-004814",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (8103 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-001657",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (2579 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-004073",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (80 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-005239",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (6745 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-000293",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (4690 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-001021",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (4670 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-009774",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (2170 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-001624",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (2522 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "EXP-2026-005432",
+    "issue_type": "DOUBLE_EXPIRATION",
+    "expected_outcome": "IDEMPOTENT_SINGLE_EXPIRY",
+    "actual_outcome": "DOUBLE_EXPIRED (7829 pts x2)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-012356",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$736.85)",
+    "actual_outcome": "TIER-SILVER (gross=$1240.46)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-009096",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$852.68)",
+    "actual_outcome": "TIER-SILVER (gross=$1380.75)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-017963",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$926.50)",
+    "actual_outcome": "TIER-SILVER (gross=$1008.61)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-012040",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$837.54)",
+    "actual_outcome": "TIER-SILVER (gross=$1876.51)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-007837",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$660.37)",
+    "actual_outcome": "TIER-SILVER (gross=$1324.48)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-009543",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$717.82)",
+    "actual_outcome": "TIER-SILVER (gross=$1363.23)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-016341",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$710.73)",
+    "actual_outcome": "TIER-SILVER (gross=$1276.00)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-002715",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$573.20)",
+    "actual_outcome": "TIER-SILVER (gross=$1147.23)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-013078",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-BRONZE (net=$892.17)",
+    "actual_outcome": "TIER-SILVER (gross=$1552.46)",
+    "detection_status": "DETECTED"
+  },
+  {
+    "record_id": "LOY-CUST-007425",
+    "issue_type": "INCORRECT_TIER_GROSS_SPEND",
+    "expected_outcome": "TIER-SILVER (net=$3417.12)",
+    "actual_outcome": "TIER-GOLD (gross=$5476.67)",
+    "detection_status": "DETECTED"
+  }
+]

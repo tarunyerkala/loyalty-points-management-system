@@ -1,0 +1,4 @@
+tier_id,tier_name,tier_level,min_qualifying_spend,max_qualifying_spend,earn_rate_multiplier,effective_from,effective_to,is_active
+TIER-BRONZE,Bronze,1,0.0,999.99,1.0,2025-01-01T00:00:00,,1
+TIER-SILVER,Silver,2,1000.0,4999.99,1.5,2025-01-01T00:00:00,,1
+TIER-GOLD,Gold,3,5000.0,,2.0,2025-01-01T00:00:00,,1

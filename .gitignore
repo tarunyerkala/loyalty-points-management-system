@@ -1,0 +1,56 @@
+# Python bytecode & caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest caches
+.pytest_cache/
+**/.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment & secret files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.secret
+secrets.*
+*credentials*
+
+# SQLite database & WAL/SHM runtime files
+loyalty.db
+loyalty.db-shm
+loyalty.db-wal
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Temporary verification scripts, logs & browser artifacts
+verify_*.py
+audit_*.py
+e2e_*.py
+tmp_*.py
+scratch/
+*.log
+*.tmp
+*.bak
+playwright-report/
+test-results/
+blob-report/
+.playwright/
+screenshots/
+*.screenshot.png
+cdp_profile*/
+loyalty_cdp_*/
+loyalty_e2e_cdp_*/
+chromedriver.log
+msedgedriver.log
+
